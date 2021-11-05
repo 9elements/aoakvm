@@ -42,15 +42,15 @@ struct aoakvmMSGScreens {
 
     This struct holds information for the initialization of Android Open Accessory via USB
     Fields:
-        const char *waitForDevice;
-        const char *aoaInit;
-        const char *waitForDataTransmission;
-        const char *manufacturer;
-        const char *modelName;
-        const char *description;
-        const char *version;
-        const char *uri;
-        const char *serialNumber;
+        const char *waitForDevice;              - Path to BPM file which indicates process of waiting for device
+        const char *aoaInit;                    - Path to BPM file which indicates that Android Open Accessory in initializing
+        const char *waitForDataTransmission;    - Path to BPM file which indicates that the application awaits video stream data transmission.
+        const char *manufacturer;               - Manufacturer - value is used to filter on android app
+        const char *modelName;                  - Model - value is used to filter on android app
+        const char *description;                - Description - value is used to filter on android app
+        const char *version;                    - Version - value is used to filter on android app
+        const char *uri;                        - URI - value is used to filter on android app
+        const char *serialNumber;               - Serialnumber - value is used to filter on android app
 */
 struct aoakvmConfig_t {
     const char *waitForDevice;
@@ -137,30 +137,57 @@ struct aoakvmUSBConnection_t {
     enum aoakvm_usb_status_e status;
 };
 
+/*
+    extern struct aoakvmUSBConnection_t *usbCon;
+
+    Defined in aoakvm.c
+
+    This variable gives public access to the usb connection variable.
+*/
 extern struct aoakvmUSBConnection_t *usbCon;
 
 /*
 
-    aoakvm_push_event
-    Push customizable event into the event_queue
+    DEVICE_CONNECTION_EVENT;
+    DEVICE_DISCONNECTION_EVENT
+
+    This variables are defined in aoakvm.c and accessable from any file
 
 */
 
 extern Uint32 DEVICE_CONNECTION_EVENT;
 extern Uint32 DEVICE_DISCONNECTION_EVENT;
+
+/*
+    int aoakvm_push_event(Uint32 *eventType, void *data1, void *data2);
+
+    This function takes an custom event type and creates a new event for the event queue.
+*/
 int aoakvm_push_event(Uint32 *eventType, void *data1, void *data2);
 
 /*
-
     aoakvm_wait_for_device_connection
 
     This should be called by the event_loop when the usb device is not available yet,
     or the connection has been lost
 
 */
-
 int aoakvm_wait_for_device_connection();
 
+/*
+    struct usbRequest_t
+
+    Fields:
+        uint8_t requestType;
+        uint8_t request;
+        uint16_t value;
+        uint16_t index;
+        unsigned char *buffer;
+        uint16_t length;
+        unsigned int timeout;
+
+        This structure is used to pass data to the usb_writeToPhone(...)
+*/
 struct usbRequest_t {
   uint8_t requestType;
   uint8_t request;
@@ -171,11 +198,31 @@ struct usbRequest_t {
   unsigned int timeout;
 };
 
+
+/*
+    extern SDL_Window *mainwindow;
+
+    Defined in aoakvm.c
+
+    This variable gives public access to the main window variable.
+*/
 extern SDL_Window *mainwindow;
+
+/*
+    extern struct aoakvmUSBConnection_t *usbCon;
+
+    Defined in aoakvm.c
+
+    This variable gives public access to the usb connection variable.
+*/
 extern SDL_Renderer *renderer;
 
 /*
-    MsgScreen
+    extern struct aoakvmMSGScreens *screens;
+
+    Defined in aoakvm.c
+
+    This variable gives public access to the message screen variable.
 */
 extern struct aoakvmMSGScreens *screens;
 

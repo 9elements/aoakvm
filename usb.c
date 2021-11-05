@@ -18,8 +18,21 @@
 #define ACCESSORY_VID       0x18D1
 
 // Static Functions
+
+/*
+    static int usb_initAOA(libusb_device_handle *handle, struct AOA_USB_Config *cfg);
+
+    Initializes Android Open Accessory mode on the phone. It does so by sending data held in *cfg
+    via libusb_control_transfer(...) to the phone.
+*/
 static int usb_initAOA(libusb_device_handle *handle, struct aoakvmConfig_t *cfg);
 
+/*
+	static int init_HIDS(libusb_device_handle *handle);
+
+	Registers the app as mouse, keyboard and touchpad (humand interface device) at the android device.
+	AOA must be initialized first.
+*/
 static int init_HIDS(libusb_device_handle *handle);
 
 
