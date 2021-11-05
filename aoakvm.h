@@ -42,15 +42,15 @@ struct aoakvmMSGScreens {
 
     This struct holds information for the initialization of Android Open Accessory via USB
     Fields:
-        const char *waitForDevice;
-        const char *aoaInit;
-        const char *waitForDataTransmission;
-        const char *manufacturer;
-        const char *modelName;
-        const char *description;
-        const char *version;
-        const char *uri;
-        const char *serialNumber;
+        const char *waitForDevice;              - Path to BPM file which indicates process of waiting for device
+        const char *aoaInit;                    - Path to BPM file which indicates that Android Open Accessory in initializing
+        const char *waitForDataTransmission;    - Path to BPM file which indicates that the application awaits video stream data transmission.
+        const char *manufacturer;               - Manufacturer - value is used to filter on android app
+        const char *modelName;                  - Model - value is used to filter on android app
+        const char *description;                - Description - value is used to filter on android app
+        const char *version;                    - Version - value is used to filter on android app
+        const char *uri;                        - URI - value is used to filter on android app
+        const char *serialNumber;               - Serialnumber - value is used to filter on android app
 */
 struct aoakvmConfig_t {
     const char *waitForDevice;
