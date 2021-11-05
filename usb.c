@@ -6,6 +6,7 @@
 #include "hid.h"
 #include "video.h"
 #include "aoakvm_log.h"
+#include "window.h"
 
 /*
 	Accessory PID:      0x2D00 if phone is in AOA mode
@@ -150,7 +151,7 @@ libusb_device_handle *usb_get_aoa_handle() {
 	libusb_device_handle *handle = NULL;
   	libusb_device **list = NULL;
 
-
+	window_changeMsgscreenTo(screens, renderer, mainwindow, AOA_INITIALIZED);
 
   	for (int i = 0; i < 10; i++) {
 		  log_debug("Test");
